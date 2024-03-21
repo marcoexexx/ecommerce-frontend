@@ -1,16 +1,9 @@
-import { Roboto } from 'next/font/google';
+import { colors } from "@/themes/lightSchema";
 import { TypographyOptions } from "@mui/material/styles/createTypography";
-import { colors } from ".";
-
-
-const roboto = Roboto({
-  weight: ['300', '400', '500', '700'],
-  subsets: ['latin'],
-  display: 'swap',
-});
 
 export const typography: TypographyOptions = {
-  fontFamily: roboto.style.fontFamily,
+  fontFamily:
+    '"Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji"',
   h1: {
     fontWeight: 500,
     fontSize: 35
