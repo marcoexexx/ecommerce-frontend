@@ -66,7 +66,8 @@ Before you begin, make sure you have the following installed:
 
    The application will be accessible at [http://localhost:3000](http://localhost:3000).
 
-##
+## 
+
 Backend: [admin-dashboard](https://github.com/alk-neq-me/admin-dashboard)
 
 ## Project Structure

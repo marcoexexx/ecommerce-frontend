@@ -1,18 +1,17 @@
-"use client"
+"use client";
 // import { useStore } from "@/hooks";
+import { CssBaseline } from "@mui/material";
 import { ThemeProvider } from "@mui/material/styles";
 import { themeCreator } from "./base";
-import { CssBaseline } from "@mui/material";
 import NextAppDirEmotionCacheProvider from "./emotion-cache";
-
 
 // TODO: theme context
 export default function ThemeRegistry(
-  {children}: {children: React.ReactNode}
+  { children }: { children: React.ReactNode },
 ) {
   // const { state } = useStore()
 
-  const theme = themeCreator(/* state.theme */ "light")
+  const theme = themeCreator(/* state.theme */ "light");
 
   return (
     <NextAppDirEmotionCacheProvider options={{ key: "mui" }}>
@@ -21,5 +20,5 @@ export default function ThemeRegistry(
         {children}
       </ThemeProvider>
     </NextAppDirEmotionCacheProvider>
-  )
+  );
 }

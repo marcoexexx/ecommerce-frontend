@@ -1,2 +1,2 @@
-export * from './useGetBrands'
-export * from './useGetBrand'
+export * from "./useGetBrand";
+export * from "./useGetBrands";

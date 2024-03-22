@@ -1,31 +1,32 @@
 import AppError, { AppErrorKind } from "@/libs/exceptions";
 import Result, { Err, Ok } from "@/libs/result";
 
-import { BrandWhereInput } from "@/context/brand";
 import { CacheKey, CacheResource } from "@/context/cacheKey";
-import { BrandApiService } from "@/services/brandsApi";
+import { ProductWhereInput } from "@/context/product";
+import { ProductApiService } from "@/services/productsApi";
 import { Pagination } from "@/services/types";
 import { useQuery } from "@tanstack/react-query";
 
-const apiService = BrandApiService.new();
+const apiService = ProductApiService.new();
 
-export function useGetBrands({
+export function useGetProducts({
   filter,
   pagination,
   include,
 }: {
-  filter?: BrandWhereInput["where"];
-  include?: BrandWhereInput["include"];
+  filter?: ProductWhereInput["where"];
+  include?: ProductWhereInput["include"];
   pagination: Pagination;
 }) {
   const query = useQuery({
-    queryKey: [CacheResource.Brand, { filter, pagination, include }] as CacheKey<"brands">["list"],
+    queryKey: [CacheResource.Product, { filter, pagination, include }] as CacheKey<"products">["list"],
     queryFn: args =>
       apiService.findMany(args, {
         filter,
         pagination,
         include,
       }),
+    // queryFn: () => Promise.reject(new Error("Some api error")),
     select: data => data,
   });
 

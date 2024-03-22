@@ -1,25 +1,25 @@
+import { ProductWhereInput } from "@/context/product";
 import AppError, { AppErrorKind } from "@/libs/exceptions";
 import Result, { Err, Ok } from "@/libs/result";
 
-import { BrandWhereInput } from "@/context/brand";
 import { CacheKey, CacheResource } from "@/context/cacheKey";
-import { BrandApiService } from "@/services/brandsApi";
+import { ProductApiService } from "@/services/productsApi";
 import { useQuery } from "@tanstack/react-query";
 
-const apiService = BrandApiService.new();
+const apiService = ProductApiService.new();
 
-export function useGetBrand({
+export function useGetProduct({
   id,
   include,
 }: {
   id: string | undefined;
-  include?: BrandWhereInput["include"];
+  include?: ProductWhereInput["include"];
 }) {
   const query = useQuery({
     enabled: !!id,
-    queryKey: [CacheResource.Brand, { id, include }] as CacheKey<"brands">["detail"],
+    queryKey: [CacheResource.Product, { id, include }] as CacheKey<"products">["detail"],
     queryFn: args => apiService.find(args, { filter: { id }, include }),
-    select: data => data?.brand,
+    select: data => data?.product,
   });
 
   const try_data: Result<typeof query.data, AppError> = !!query.error && query.isError

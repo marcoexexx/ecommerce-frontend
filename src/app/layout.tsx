@@ -1,23 +1,22 @@
-import { Providers } from '@/components'
-import getConfig from '@/libs/getConfig'
-import type { Metadata } from 'next'
-import { Inter } from 'next/font/google'
+import { Providers } from "@/components";
+import getConfig from "@/libs/getConfig";
+import type { Metadata } from "next";
+import { Inter } from "next/font/google";
 
-
-const inter = Inter({ subsets: ['latin'] })
+const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: getConfig("appName"),
   description: getConfig("appName"),
   icons: {
-    icon: "/favicon.ico"
-  }
-}
+    icon: "/favicon.ico",
+  },
+};
 
 export default function RootLayout({
   children,
 }: {
-  children: React.ReactNode
+  children: React.ReactNode;
 }) {
   return (
     <html lang="en">
@@ -27,5 +26,5 @@ export default function RootLayout({
         </Providers>
       </body>
     </html>
-  )
+  );
 }
