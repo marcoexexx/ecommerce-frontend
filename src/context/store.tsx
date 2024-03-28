@@ -34,7 +34,12 @@ import {
   ChangeAuditLogPageActions,
   ChangeAuditLogPageSizeActions,
 } from "./auditLogs";
-import { BrandFilterActions, BrandWhereInput, ChangeBrandPageActions, ChangeBrandPageSizeActions } from "./brand";
+import {
+  BrandFilterActions,
+  BrandWhereInput,
+  ChangeBrandPageActions,
+  ChangeBrandPageSizeActions,
+} from "./brand";
 import { CacheResource } from "./cacheKey";
 import {
   CategoryFilterActions,
@@ -42,7 +47,12 @@ import {
   ChangeCategoryPageActions,
   ChangeCategoryPageSizeActions,
 } from "./category";
-import { ChangeCouponPageActions, ChangeCouponPageSizeActions, CouponFilterActions, CouponWhereInput } from "./coupon";
+import {
+  ChangeCouponPageActions,
+  ChangeCouponPageSizeActions,
+  CouponFilterActions,
+  CouponWhereInput,
+} from "./coupon";
 import {
   ChangeExchangePageActions,
   ChangeExchangePageSizeActions,
@@ -77,8 +87,18 @@ import {
   ProductFilterActions,
   ProductWhereInput,
 } from "./product";
-import { ChangeRegionPageActions, ChangeRegionPageSizeActions, RegionFilterActions, RegionWhereInput } from "./region";
-import { ChangeRolePageActions, ChangeRolePageSizeActions, RoleFilterActions, RoleWhereInput } from "./role";
+import {
+  ChangeRegionPageActions,
+  ChangeRegionPageSizeActions,
+  RegionFilterActions,
+  RegionWhereInput,
+} from "./region";
+import {
+  ChangeRolePageActions,
+  ChangeRolePageSizeActions,
+  RoleFilterActions,
+  RoleWhereInput,
+} from "./role";
 import {
   ChangeSalesCategoryPageActions,
   ChangeSalesCategoryPageSizeActions,
@@ -97,7 +117,12 @@ import {
   TownshipFilterActions,
   TownshipWhereInput,
 } from "./township";
-import { ChangeUserPageActions, ChangeUserPageSizeActions, UserFilterActions, UserWhereInput } from "./user";
+import {
+  ChangeUserPageActions,
+  ChangeUserPageSizeActions,
+  UserFilterActions,
+  UserWhereInput,
+} from "./user";
 import {
   ChangeUserAddressPageActions,
   ChangeUserAddressPageSizeActions,
@@ -106,7 +131,10 @@ import {
 } from "./userAddress";
 
 const INITIAL_LIST_PAGE_LIMIT = 10;
-export const INITIAL_PAGINATION: Pagination = { page: 1, pageSize: INITIAL_LIST_PAGE_LIMIT };
+export const INITIAL_PAGINATION: Pagination = {
+  page: 1,
+  pageSize: INITIAL_LIST_PAGE_LIMIT,
+};
 
 type Singular<T> = T extends `${infer Y}ies` ? `${Y}y`
   // : T extends `${infer S}es` ? S
@@ -240,7 +268,7 @@ type Action =
 type Dispatch = (action: Action) => void;
 
 export const StoreContext = createContext<
-  { state: Store; dispatch: Dispatch } | undefined
+  { state: Store; dispatch: Dispatch; } | undefined
 >(undefined);
 
 const initialState: Store = {
@@ -339,7 +367,10 @@ const stateReducer = (state: Store, action: Action): Store => {
     }
 
     case "OPEN_TOAST": {
-      return { ...state, toast: { ...state.toast, status: true, ...action.payload } };
+      return {
+        ...state,
+        toast: { ...state.toast, status: true, ...action.payload },
+      };
     }
 
     case "CLOSE_TOAST": {
@@ -380,11 +411,17 @@ const stateReducer = (state: Store, action: Action): Store => {
     }
 
     case "OPEN_MODAL_FORM": {
-      return { ...state, modalForm: { state: true, field: action.payload } };
+      return {
+        ...state,
+        modalForm: { state: true, field: action.payload },
+      };
     }
 
     case "CLOSE_MODAL_FORM": {
-      return { ...state, modalForm: { state: false, field: action.payload } };
+      return {
+        ...state,
+        modalForm: { state: false, field: action.payload },
+      };
     }
 
     case "CLOSE_ALL_MODAL_FORM": {
@@ -406,7 +443,8 @@ const stateReducer = (state: Store, action: Action): Store => {
         userFilter: {
           ...state.userFilter,
           pagination: {
-            pageSize: state.userFilter.pagination?.pageSize || INITIAL_PAGINATION.pageSize,
+            pageSize: state.userFilter.pagination?.pageSize
+              || INITIAL_PAGINATION.pageSize,
             page: action.payload,
           },
         },
@@ -418,7 +456,8 @@ const stateReducer = (state: Store, action: Action): Store => {
         userFilter: {
           ...state.userFilter,
           pagination: {
-            page: state.userFilter.pagination?.page || INITIAL_PAGINATION.page,
+            page: state.userFilter.pagination?.page
+              || INITIAL_PAGINATION.page,
             pageSize: action.payload,
           },
         },
@@ -440,7 +479,8 @@ const stateReducer = (state: Store, action: Action): Store => {
         shopownerFilter: {
           ...state.shopownerFilter,
           pagination: {
-            pageSize: state.shopownerFilter.pagination?.pageSize || INITIAL_PAGINATION.pageSize,
+            pageSize: state.shopownerFilter.pagination?.pageSize
+              || INITIAL_PAGINATION.pageSize,
             page: action.payload,
           },
         },
@@ -452,7 +492,8 @@ const stateReducer = (state: Store, action: Action): Store => {
         shopownerFilter: {
           ...state.shopownerFilter,
           pagination: {
-            page: state.shopownerFilter.pagination?.page || INITIAL_PAGINATION.page,
+            page: state.shopownerFilter.pagination?.page
+              || INITIAL_PAGINATION.page,
             pageSize: action.payload,
           },
         },
@@ -474,7 +515,8 @@ const stateReducer = (state: Store, action: Action): Store => {
         permissionFilter: {
           ...state.permissionFilter,
           pagination: {
-            pageSize: state.permissionFilter.pagination?.pageSize || INITIAL_PAGINATION.pageSize,
+            pageSize: state.permissionFilter.pagination?.pageSize
+              || INITIAL_PAGINATION.pageSize,
             page: action.payload,
           },
         },
@@ -486,7 +528,8 @@ const stateReducer = (state: Store, action: Action): Store => {
         permissionFilter: {
           ...state.permissionFilter,
           pagination: {
-            page: state.permissionFilter.pagination?.page || INITIAL_PAGINATION.page,
+            page: state.permissionFilter.pagination?.page
+              || INITIAL_PAGINATION.page,
             pageSize: action.payload,
           },
         },
@@ -508,7 +551,8 @@ const stateReducer = (state: Store, action: Action): Store => {
         roleFilter: {
           ...state.roleFilter,
           pagination: {
-            pageSize: state.roleFilter.pagination?.pageSize || INITIAL_PAGINATION.pageSize,
+            pageSize: state.roleFilter.pagination?.pageSize
+              || INITIAL_PAGINATION.pageSize,
             page: action.payload,
           },
         },
@@ -520,7 +564,8 @@ const stateReducer = (state: Store, action: Action): Store => {
         roleFilter: {
           ...state.roleFilter,
           pagination: {
-            page: state.roleFilter.pagination?.page || INITIAL_PAGINATION.page,
+            page: state.roleFilter.pagination?.page
+              || INITIAL_PAGINATION.page,
             pageSize: action.payload,
           },
         },
@@ -542,7 +587,8 @@ const stateReducer = (state: Store, action: Action): Store => {
         orderFilter: {
           ...state.orderFilter,
           pagination: {
-            pageSize: state.orderFilter.pagination?.pageSize || INITIAL_PAGINATION.pageSize,
+            pageSize: state.orderFilter.pagination?.pageSize
+              || INITIAL_PAGINATION.pageSize,
             page: action.payload,
           },
         },
@@ -554,7 +600,8 @@ const stateReducer = (state: Store, action: Action): Store => {
         orderFilter: {
           ...state.orderFilter,
           pagination: {
-            page: state.orderFilter.pagination?.page || INITIAL_PAGINATION.page,
+            page: state.orderFilter.pagination?.page
+              || INITIAL_PAGINATION.page,
             pageSize: action.payload,
           },
         },
@@ -576,7 +623,8 @@ const stateReducer = (state: Store, action: Action): Store => {
         potentialOrderFilter: {
           ...state.potentialOrderFilter,
           pagination: {
-            pageSize: state.potentialOrderFilter.pagination?.pageSize || INITIAL_PAGINATION.pageSize,
+            pageSize: state.potentialOrderFilter.pagination?.pageSize
+              || INITIAL_PAGINATION.pageSize,
             page: action.payload,
           },
         },
@@ -588,7 +636,8 @@ const stateReducer = (state: Store, action: Action): Store => {
         potentialOrderFilter: {
           ...state.potentialOrderFilter,
           pagination: {
-            page: state.potentialOrderFilter.pagination?.page || INITIAL_PAGINATION.page,
+            page: state.potentialOrderFilter.pagination?.page
+              || INITIAL_PAGINATION.page,
             pageSize: action.payload,
           },
         },
@@ -610,7 +659,8 @@ const stateReducer = (state: Store, action: Action): Store => {
         pickupAddressFilter: {
           ...state.pickupAddressFilter,
           pagination: {
-            pageSize: state.pickupAddressFilter.pagination?.pageSize || INITIAL_PAGINATION.pageSize,
+            pageSize: state.pickupAddressFilter.pagination?.pageSize
+              || INITIAL_PAGINATION.pageSize,
             page: action.payload,
           },
         },
@@ -622,7 +672,8 @@ const stateReducer = (state: Store, action: Action): Store => {
         pickupAddressFilter: {
           ...state.pickupAddressFilter,
           pagination: {
-            page: state.pickupAddressFilter.pagination?.page || INITIAL_PAGINATION.page,
+            page: state.pickupAddressFilter.pagination?.page
+              || INITIAL_PAGINATION.page,
             pageSize: action.payload,
           },
         },
@@ -644,7 +695,8 @@ const stateReducer = (state: Store, action: Action): Store => {
         userAddressFilter: {
           ...state.userAddressFilter,
           pagination: {
-            pageSize: state.userAddressFilter.pagination?.pageSize || INITIAL_PAGINATION.pageSize,
+            pageSize: state.userAddressFilter.pagination?.pageSize
+              || INITIAL_PAGINATION.pageSize,
             page: action.payload,
           },
         },
@@ -656,7 +708,8 @@ const stateReducer = (state: Store, action: Action): Store => {
         userAddressFilter: {
           ...state.userAddressFilter,
           pagination: {
-            page: state.userAddressFilter.pagination?.page || INITIAL_PAGINATION.page,
+            page: state.userAddressFilter.pagination?.page
+              || INITIAL_PAGINATION.page,
             pageSize: action.payload,
           },
         },
@@ -678,7 +731,8 @@ const stateReducer = (state: Store, action: Action): Store => {
         auditLogFilter: {
           ...state.auditLogFilter,
           pagination: {
-            pageSize: state.auditLogFilter.pagination?.pageSize || INITIAL_PAGINATION.pageSize,
+            pageSize: state.auditLogFilter.pagination?.pageSize
+              || INITIAL_PAGINATION.pageSize,
             page: action.payload,
           },
         },
@@ -690,7 +744,8 @@ const stateReducer = (state: Store, action: Action): Store => {
         auditLogFilter: {
           ...state.auditLogFilter,
           pagination: {
-            page: state.auditLogFilter.pagination?.page || INITIAL_PAGINATION.page,
+            page: state.auditLogFilter.pagination?.page
+              || INITIAL_PAGINATION.page,
             pageSize: action.payload,
           },
         },
@@ -712,7 +767,8 @@ const stateReducer = (state: Store, action: Action): Store => {
         accessLogFilter: {
           ...state.accessLogFilter,
           pagination: {
-            pageSize: state.accessLogFilter.pagination?.pageSize || INITIAL_PAGINATION.pageSize,
+            pageSize: state.accessLogFilter.pagination?.pageSize
+              || INITIAL_PAGINATION.pageSize,
             page: action.payload,
           },
         },
@@ -724,7 +780,8 @@ const stateReducer = (state: Store, action: Action): Store => {
         accessLogFilter: {
           ...state.accessLogFilter,
           pagination: {
-            page: state.accessLogFilter.pagination?.page || INITIAL_PAGINATION.page,
+            page: state.accessLogFilter.pagination?.page
+              || INITIAL_PAGINATION.page,
             pageSize: action.payload,
           },
         },
@@ -746,7 +803,8 @@ const stateReducer = (state: Store, action: Action): Store => {
         exchangeFilter: {
           ...state.exchangeFilter,
           pagination: {
-            pageSize: state.exchangeFilter.pagination?.pageSize || INITIAL_PAGINATION.pageSize,
+            pageSize: state.exchangeFilter.pagination?.pageSize
+              || INITIAL_PAGINATION.pageSize,
             page: action.payload,
           },
         },
@@ -758,7 +816,8 @@ const stateReducer = (state: Store, action: Action): Store => {
         exchangeFilter: {
           ...state.exchangeFilter,
           pagination: {
-            page: state.exchangeFilter.pagination?.page || INITIAL_PAGINATION.page,
+            page: state.exchangeFilter.pagination?.page
+              || INITIAL_PAGINATION.page,
             pageSize: action.payload,
           },
         },
@@ -780,7 +839,8 @@ const stateReducer = (state: Store, action: Action): Store => {
         couponFilter: {
           ...state.couponFilter,
           pagination: {
-            pageSize: state.couponFilter.pagination?.pageSize || INITIAL_PAGINATION.pageSize,
+            pageSize: state.couponFilter.pagination?.pageSize
+              || INITIAL_PAGINATION.pageSize,
             page: action.payload,
           },
         },
@@ -792,7 +852,8 @@ const stateReducer = (state: Store, action: Action): Store => {
         couponFilter: {
           ...state.couponFilter,
           pagination: {
-            page: state.couponFilter.pagination?.page || INITIAL_PAGINATION.page,
+            page: state.couponFilter.pagination?.page
+              || INITIAL_PAGINATION.page,
             pageSize: action.payload,
           },
         },
@@ -814,7 +875,8 @@ const stateReducer = (state: Store, action: Action): Store => {
         categoryFilter: {
           ...state.categoryFilter,
           pagination: {
-            pageSize: state.categoryFilter.pagination?.pageSize || INITIAL_PAGINATION.pageSize,
+            pageSize: state.categoryFilter.pagination?.pageSize
+              || INITIAL_PAGINATION.pageSize,
             page: action.payload,
           },
         },
@@ -826,7 +888,8 @@ const stateReducer = (state: Store, action: Action): Store => {
         categoryFilter: {
           ...state.categoryFilter,
           pagination: {
-            page: state.categoryFilter.pagination?.page || INITIAL_PAGINATION.page,
+            page: state.categoryFilter.pagination?.page
+              || INITIAL_PAGINATION.page,
             pageSize: action.payload,
           },
         },
@@ -848,7 +911,8 @@ const stateReducer = (state: Store, action: Action): Store => {
         salesCategoryFilter: {
           ...state.salesCategoryFilter,
           pagination: {
-            pageSize: state.salesCategoryFilter.pagination?.pageSize || INITIAL_PAGINATION.pageSize,
+            pageSize: state.salesCategoryFilter.pagination?.pageSize
+              || INITIAL_PAGINATION.pageSize,
             page: action.payload,
           },
         },
@@ -860,7 +924,8 @@ const stateReducer = (state: Store, action: Action): Store => {
         salesCategoryFilter: {
           ...state.salesCategoryFilter,
           pagination: {
-            page: state.salesCategoryFilter.pagination?.page || INITIAL_PAGINATION.page,
+            page: state.salesCategoryFilter.pagination?.page
+              || INITIAL_PAGINATION.page,
             pageSize: action.payload,
           },
         },
@@ -882,7 +947,8 @@ const stateReducer = (state: Store, action: Action): Store => {
         brandFilter: {
           ...state.brandFilter,
           pagination: {
-            pageSize: state.brandFilter.pagination?.pageSize || INITIAL_PAGINATION.pageSize,
+            pageSize: state.brandFilter.pagination?.pageSize
+              || INITIAL_PAGINATION.pageSize,
             page: action.payload,
           },
         },
@@ -894,7 +960,8 @@ const stateReducer = (state: Store, action: Action): Store => {
         brandFilter: {
           ...state.brandFilter,
           pagination: {
-            page: state.brandFilter.pagination?.page || INITIAL_PAGINATION.page,
+            page: state.brandFilter.pagination?.page
+              || INITIAL_PAGINATION.page,
             pageSize: action.payload,
           },
         },
@@ -916,7 +983,8 @@ const stateReducer = (state: Store, action: Action): Store => {
         townshipFilter: {
           ...state.townshipFilter,
           pagination: {
-            pageSize: state.townshipFilter.pagination?.pageSize || INITIAL_PAGINATION.pageSize,
+            pageSize: state.townshipFilter.pagination?.pageSize
+              || INITIAL_PAGINATION.pageSize,
             page: action.payload,
           },
         },
@@ -928,7 +996,8 @@ const stateReducer = (state: Store, action: Action): Store => {
         townshipFilter: {
           ...state.townshipFilter,
           pagination: {
-            page: state.townshipFilter.pagination?.page || INITIAL_PAGINATION.page,
+            page: state.townshipFilter.pagination?.page
+              || INITIAL_PAGINATION.page,
             pageSize: action.payload,
           },
         },
@@ -950,7 +1019,8 @@ const stateReducer = (state: Store, action: Action): Store => {
         regionFilter: {
           ...state.regionFilter,
           pagination: {
-            pageSize: state.regionFilter.pagination?.pageSize || INITIAL_PAGINATION.pageSize,
+            pageSize: state.regionFilter.pagination?.pageSize
+              || INITIAL_PAGINATION.pageSize,
             page: action.payload,
           },
         },
@@ -962,7 +1032,8 @@ const stateReducer = (state: Store, action: Action): Store => {
         regionFilter: {
           ...state.regionFilter,
           pagination: {
-            page: state.regionFilter.pagination?.page || INITIAL_PAGINATION.page,
+            page: state.regionFilter.pagination?.page
+              || INITIAL_PAGINATION.page,
             pageSize: action.payload,
           },
         },
@@ -984,7 +1055,8 @@ const stateReducer = (state: Store, action: Action): Store => {
         productFilter: {
           ...state.productFilter,
           pagination: {
-            pageSize: state.productFilter.pagination?.pageSize || INITIAL_PAGINATION.pageSize,
+            pageSize: state.productFilter.pagination?.pageSize
+              || INITIAL_PAGINATION.pageSize,
             page: action.payload,
           },
         },
@@ -996,7 +1068,8 @@ const stateReducer = (state: Store, action: Action): Store => {
         productFilter: {
           ...state.productFilter,
           pagination: {
-            page: state.productFilter.pagination?.page || INITIAL_PAGINATION.page,
+            page: state.productFilter.pagination?.page
+              || INITIAL_PAGINATION.page,
             pageSize: action.payload,
           },
         },
@@ -1020,7 +1093,10 @@ const stateReducer = (state: Store, action: Action): Store => {
     default: {
       const _: never = action;
       console.warn({ message: "Unhandled action type", _ });
-      throw AppError.new(AppErrorKind.InvalidInputError, "Unhandled action type");
+      throw AppError.new(
+        AppErrorKind.InvalidInputError,
+        "Unhandled action type",
+      );
     }
   }
 };

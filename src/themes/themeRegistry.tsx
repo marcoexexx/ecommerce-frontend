@@ -7,7 +7,7 @@ import NextAppDirEmotionCacheProvider from "./emotion-cache";
 
 // TODO: theme context
 export default function ThemeRegistry(
-  { children }: { children: React.ReactNode },
+  { children }: { children: React.ReactNode; },
 ) {
   // const { state } = useStore()
 

@@ -3,9 +3,18 @@ import { BrandWhereInput } from "@/context/brand";
 import { CacheResource } from "@/context/cacheKey";
 import { authApi } from "./authApi";
 import { BaseApiService } from "./baseApiService";
-import { Brand, GenericResponse, HttpListResponse, HttpResponse, Pagination, QueryOptionArgs } from "./types";
+import {
+  Brand,
+  GenericResponse,
+  HttpListResponse,
+  HttpResponse,
+  Pagination,
+  QueryOptionArgs,
+} from "./types";
 
-export class BrandApiService extends BaseApiService<BrandWhereInput, Brand> {
+export class BrandApiService
+  extends BaseApiService<BrandWhereInput, Brand>
+{
   constructor(public repo: CacheResource) {
     super();
   }
@@ -42,7 +51,7 @@ export class BrandApiService extends BaseApiService<BrandWhereInput, Brand> {
   async find(
     opt: QueryOptionArgs,
     where: {
-      filter: { id: string | undefined };
+      filter: { id: string | undefined; };
       include?: BrandWhereInput["include"];
     },
   ): Promise<GenericResponse<Brand, "brand"> | undefined> {
@@ -57,7 +66,9 @@ export class BrandApiService extends BaseApiService<BrandWhereInput, Brand> {
     return data;
   }
 
-  async create(payload: CreateBrandInput): Promise<GenericResponse<Brand, "brand">> {
+  async create(
+    payload: CreateBrandInput,
+  ): Promise<GenericResponse<Brand, "brand">> {
     const url = `/${this.repo}`;
 
     const { data } = await authApi.post(url, payload);
@@ -68,7 +79,10 @@ export class BrandApiService extends BaseApiService<BrandWhereInput, Brand> {
     const url = `/${this.repo}/excel-upload`;
 
     const formData = new FormData();
-    const blob = new Blob([buf], { type: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" });
+    const blob = new Blob([buf], {
+      type:
+        "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+    });
 
     formData.append("excel", blob, `Brands_${Date.now()}.xlsx`);
 
@@ -81,7 +95,9 @@ export class BrandApiService extends BaseApiService<BrandWhereInput, Brand> {
     return data;
   }
 
-  async update(arg: { id: string; payload: UpdateBrandInput }): Promise<GenericResponse<Brand, "brand">> {
+  async update(
+    arg: { id: string; payload: UpdateBrandInput; },
+  ): Promise<GenericResponse<Brand, "brand">> {
     const { id, payload } = arg;
     const url = `/${this.repo}/detail/${id}`;
 
@@ -92,7 +108,9 @@ export class BrandApiService extends BaseApiService<BrandWhereInput, Brand> {
   async deleteMany(ids: string[]): Promise<HttpResponse> {
     const url = `/${this.repo}/multi`;
 
-    const { data } = await authApi.delete(url, { data: { brandIds: ids } });
+    const { data } = await authApi.delete(url, {
+      data: { brandIds: ids },
+    });
     return data;
   }
 

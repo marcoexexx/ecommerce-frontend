@@ -12,7 +12,9 @@ import {
   QueryOptionArgs,
 } from "./types";
 
-export class ProductApiService extends BaseApiService<ProductWhereInput, Product> {
+export class ProductApiService
+  extends BaseApiService<ProductWhereInput, Product>
+{
   constructor(public repo: CacheResource) {
     super();
   }
@@ -49,7 +51,7 @@ export class ProductApiService extends BaseApiService<ProductWhereInput, Product
   async find(
     opt: QueryOptionArgs,
     where: {
-      filter: { id: string | undefined };
+      filter: { id: string | undefined; };
       include?: ProductWhereInput["include"];
     },
   ): Promise<GenericResponse<Product, "product"> | undefined> {
@@ -66,8 +68,10 @@ export class ProductApiService extends BaseApiService<ProductWhereInput, Product
 
   async findManySaleCategories(
     opt: QueryOptionArgs,
-    { productId }: { productId: string | undefined },
-  ): Promise<HttpListResponse<ProductSalesCategoriesResponse> | undefined> {
+    { productId }: { productId: string | undefined; },
+  ): Promise<
+    HttpListResponse<ProductSalesCategoriesResponse> | undefined
+  > {
     const url = `/${this.repo}/detail/${productId}/sales`;
 
     if (!productId) return;
@@ -78,7 +82,7 @@ export class ProductApiService extends BaseApiService<ProductWhereInput, Product
   }
 
   async like(
-    { userId, productId }: { userId: string; productId: string },
+    { userId, productId }: { userId: string; productId: string; },
   ): Promise<GenericResponse<Product, "product"> | undefined> {
     const url = `/${this.repo}/like/${productId}`;
 
@@ -86,7 +90,9 @@ export class ProductApiService extends BaseApiService<ProductWhereInput, Product
     return res.data;
   }
 
-  async unlike({ userId, productId }: { userId: string; productId: string }): Promise<HttpResponse> {
+  async unlike(
+    { userId, productId }: { userId: string; productId: string; },
+  ): Promise<HttpResponse> {
     const url = `/${this.repo}/unlike/${productId}`;
 
     const res = await authApi.patch(url, { userId });

@@ -10,19 +10,10 @@ const en = {
     save: "Save",
   },
 
-  navbar: {
-    about: "About",
-    contact: "Contact Me",
-  },
-
-  hero: {
-    welcome: "Welcome",
-    contact: "Contact Me",
-  },
-
-  about: {
-    content:
-      "Hey! I'm Aung Koko Lwin. I enjoy building dynamic, creative products from start to finish. Focused on developing intuitive experiences that constantly grow and improve based on user metrics. Always shipping.",
+  page: {
+    home: {
+      welcome: "Welcome {{name}}",
+    },
   },
 
   languages: {
@@ -35,7 +26,7 @@ const en = {
   },
 
   settings: {
-    toggle: "Toggle #{name}",
+    toggle: "Toggle {{name}}",
   },
   language: "Language",
 };

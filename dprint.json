@@ -1,5 +1,9 @@
 {
   "typescript": {
+    "indentWidth": 2,
+    "quoteStyle": "alwaysDouble",
+    "lineWidth": 75,
+    "semiColons": "always"
   },
   "json": {
   },

@@ -1,6 +1,9 @@
 "use client";
 import createCache from "@emotion/cache";
-import type { EmotionCache, Options as OptionsOfCreateCache } from "@emotion/cache";
+import type {
+  EmotionCache,
+  Options as OptionsOfCreateCache,
+} from "@emotion/cache";
 import { CacheProvider as DefaultCacheProvider } from "@emotion/react";
 import { useServerInsertedHTML } from "next/navigation";
 import * as React from "react";
@@ -17,14 +20,17 @@ export type NextAppDirEmotionCacheProviderProps = {
 };
 
 // Adapted from https://github.com/garronej/tss-react/blob/main/src/next/appDir.tsx
-export default function NextAppDirEmotionCacheProvider(props: NextAppDirEmotionCacheProviderProps) {
-  const { options, CacheProvider = DefaultCacheProvider, children } = props;
+export default function NextAppDirEmotionCacheProvider(
+  props: NextAppDirEmotionCacheProviderProps,
+) {
+  const { options, CacheProvider = DefaultCacheProvider, children } =
+    props;
 
   const [registry] = React.useState(() => {
     const cache = createCache(options);
     cache.compat = true;
     const prevInsert = cache.insert;
-    let inserted: { name: string; isGlobal: boolean }[] = [];
+    let inserted: { name: string; isGlobal: boolean; }[] = [];
     cache.insert = (...args) => {
       const [selector, serialized] = args;
       if (cache.inserted[serialized.name] === undefined) {

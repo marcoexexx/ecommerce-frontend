@@ -4,7 +4,7 @@ import { ThemeProvider } from "@mui/material/styles";
 import { themeCreator } from "./base";
 
 export default function ThemeWrapper(
-  { children }: { children: React.ReactNode },
+  { children }: { children: React.ReactNode; },
 ) {
   const { state } = useStore();
 

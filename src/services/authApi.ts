@@ -3,7 +3,12 @@ import { UserWhereInput } from "@/context/user";
 import AppError, { AppErrorKind } from "@/libs/exceptions";
 import getConfig from "@/libs/getConfig";
 import axios from "axios";
-import { HttpResponse, LoginResponse, QueryOptionArgs, UserResponse } from "./types";
+import {
+  HttpResponse,
+  LoginResponse,
+  QueryOptionArgs,
+  UserResponse,
+} from "./types";
 
 const BASE_URL = getConfig("backendEndpoint");
 
@@ -25,11 +30,16 @@ authApi.interceptors.response.use(
     const res = err.response;
     const orgReq = err.config;
 
-    if (!res) return Promise.reject(AppError.new(AppErrorKind.NetworkError));
+    if (!res) {
+      return Promise.reject(AppError.new(AppErrorKind.NetworkError));
+    }
 
     const msg = res.data.message as string;
 
-    if ((msg.includes("not logged in") || msg.includes("session has expired")) && !orgReq._retry) {
+    if (
+      (msg.includes("not logged in")
+        || msg.includes("session has expired")) && !orgReq._retry
+    ) {
       orgReq._retry = true;
       await refreshAccessTokenFn();
       return authApi(orgReq);
@@ -38,16 +48,29 @@ authApi.interceptors.response.use(
       document.location.href = "/auth/login";
     }
 
-    if (msg.includes("under maintenance")) return Promise.reject(AppError.new(AppErrorKind.UnderTheMaintenance, msg));
-    if (msg.includes("You are blocked")) return Promise.reject(AppError.new(AppErrorKind.BlockedUserError, msg));
+    if (msg.includes("under maintenance")) {
+      return Promise.reject(
+        AppError.new(AppErrorKind.UnderTheMaintenance, msg),
+      );
+    }
+    if (msg.includes("You are blocked")) {
+      return Promise.reject(
+        AppError.new(AppErrorKind.BlockedUserError, msg),
+      );
+    }
 
-    if (res.status === 403) return Promise.reject(AppError.new(AppErrorKind.AccessDeniedError));
+    if (res.status === 403) {
+      return Promise.reject(AppError.new(AppErrorKind.AccessDeniedError));
+    }
 
     return Promise.reject(err);
   },
 );
 
-export async function getMeFn(opt: QueryOptionArgs, { include }: { include?: UserWhereInput["include"] }) {
+export async function getMeFn(
+  opt: QueryOptionArgs,
+  { include }: { include?: UserWhereInput["include"]; },
+) {
   const res = await authApi.get<UserResponse>("me", {
     ...opt,
     params: {
@@ -72,13 +95,24 @@ export async function loginUserFn(user: LoginUserInput) {
   return res.data;
 }
 
-export async function verifyEmailFn(opt: QueryOptionArgs, verificationCode: string | undefined) {
+export async function verifyEmailFn(
+  opt: QueryOptionArgs,
+  verificationCode: string | undefined,
+) {
   if (!verificationCode) return;
-  const res = await authApi.get<HttpResponse>(`auth/verifyEmail/${verificationCode}`, opt);
+  const res = await authApi.get<HttpResponse>(
+    `auth/verifyEmail/${verificationCode}`,
+    opt,
+  );
   return res.data;
 }
 
-export async function resendVerifyEmailFn(payload: { id: string; code: string }) {
-  const res = await authApi.post<UserResponse>(`auth/verifyEmail/resend`, payload);
+export async function resendVerifyEmailFn(
+  payload: { id: string; code: string; },
+) {
+  const res = await authApi.post<UserResponse>(
+    `auth/verifyEmail/resend`,
+    payload,
+  );
   return res.data;
 }
