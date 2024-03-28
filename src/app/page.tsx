@@ -29,13 +29,14 @@ export default function Home() {
   return (
     <main>
       <Container maxWidth="lg">
-        {/* <Banner /> */}
+        {/* Banner */}
 
         {/* ..OtherComponents */}
 
         {/* Rendering Category's Products */}
         <RenderCategoryProducts />
 
+        {/* Testing API */}
         <Typography variant="h1">Home Page</Typography>
 
         <Typography variant="h2">Page: {pagination.page}</Typography>
@@ -62,6 +63,7 @@ export default function Home() {
         >
           Next
         </Button>
+        {/* /Testing API */}
       </Container>
     </main>
   );
